@@ -45,10 +45,13 @@ public class AlarmProxy extends KrollProxy {
 		Calendar cal =  new GregorianCalendar(year, month, day);
 		cal.add(Calendar.HOUR_OF_DAY, hour);
 		cal.add(Calendar.MINUTE, minute);
+		int requestCode = args.optInt("requestCode", 0);
 		
 		AlarmManager am = (AlarmManager) TiApplication.getInstance().getApplicationContext().getSystemService(TiApplication.ALARM_SERVICE);
 		Intent intent = new Intent(TiApplication.getInstance().getApplicationContext(), AlarmServiceListener.class);
 		intent.putExtra("alarm_service_name", serviceName);
+		intent.putExtra("notification_requestcode", requestCode);
+		intent.putExtra("notification_request_code", requestCode);
 		PendingIntent sender = PendingIntent.getBroadcast( TiApplication.getInstance().getApplicationContext(), 192837, intent,  PendingIntent.FLAG_UPDATE_CURRENT );
 		am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), sender);		
 		Log.d(AlarmmanagerModule.MODULE_FULL_NAME, "Alarm Created");	

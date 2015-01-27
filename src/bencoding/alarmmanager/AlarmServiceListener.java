@@ -49,6 +49,9 @@ public class AlarmServiceListener  extends BroadcastReceiver {
  
       	Intent serviceIntent = new Intent();
       	serviceIntent.setClassName(TiApplication.getInstance().getApplicationContext(), fullServiceName);
+      	serviceIntent.putExtra("alarm_service_name", fullServiceName);
+      	serviceIntent.putExtra("alarm_service_requestcode", bundle.getInt("alarm_service_requestcode", 0));
+      	serviceIntent.putExtra("alarm_service_request_code", bundle.getInt("alarm_service_request_code", 0));
        	
       	utils.debugLog("Is this an interval service? " + new Boolean(hasInterval).toString());      	
       	if(hasInterval){
